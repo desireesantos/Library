@@ -1,8 +1,7 @@
 package output;
 
-import main.ManageFlowBook;
+import main.FlowBook;
 
-import java.awt.*;
 import java.io.*;
 import java.util.List;
 
@@ -14,9 +13,6 @@ public class Writer {
 
     private PrintStream out;
     private BufferedReader in;
-    protected String readLine;
-    private String string[] = null;
-    Color color = new Color(0,200,255);
 
 
     public Writer(OutputStream outputStream, BufferedReader in){
@@ -25,51 +21,19 @@ public class Writer {
     }
 
 
-    public void writerResultMenu(List<String> writer) {
 
-        for (int x=0; x <= writer.size() -1 ;x++ ){
-
-            out.println( writer.get(x));
-            try {
-                readLine = in.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            }
-
-        }
-           out.print("");
-
+    public void printONFlow(List<String> writer) {
+        FlowBook flowBook = new FlowBook();
+        printMenu(writer);
+        flowBook.flow();
     }
 
 
-    public void showResultMenu(List<String> writer) {
-
+    public void printMenu(List<String> writer) {
         for (int x=0; x <= writer.size() -1 ;x++ ){
-
-           System.out.println(writer.get(x).toString());
-            try {
-                readLine = in.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            System.out.println(writer.get(x).toString() + "\033[95m");
         }
-        System.out.print("");
-        ManageFlowBook.execute();
-    }
+        System.out.println(" ");
 
-
-    public void showResult(List<String> writer) {
-
-        for (int x=0; x <= writer.size() -1 ;x++ ){
-            System.out.println(writer.get(x).toString());
-            try {
-                readLine = in.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
-        System.out.print("");
     }
 }

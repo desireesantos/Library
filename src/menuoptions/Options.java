@@ -1,17 +1,12 @@
 package menuoptions;
 
 import exception.WrongOptionException;
-import main.ManageFlowBook;
+import main.FlowBook;
+import main.InitFlowBook;
 import units.*;
-import output.Writer;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * User: dsantos
@@ -19,6 +14,7 @@ import java.util.Scanner;
  */
 public class Options {
 
+    public static final int ONE = 1;
     private List<Book> listBooks = new ArrayList<Book>();
 
     public Options() {
@@ -107,35 +103,47 @@ public class Options {
         return listBooks;
     }
 
-    public List<String> getBooks() {
+    public List<String> reserveBook() {
 
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        Writer writer = new Writer(outputStream, new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[0]))));
+        List<String> listBook = listBooksToReserv();
+        return  reserve(listBook);
+
+
+    }
+
+
+    private List<String> reserve(List<String> listBook) {
+        FlowBook flow = new FlowBook();
+        int indexBook = flow.flowToReservBook(listBook);
+
+      return reservBook(indexBook);
+
+    }
+
+    private List<String> listBooksToReserv() {
 
         List<String> listBook = new ArrayList<String>();
-        List<String> result = new ArrayList<String>();
-        listBook.add("Type number book");
-        listBook.add(" ");
-
-        for (int x=0; x <= this.listBooks.size() -1; x++){
-            listBook.add((x+1) +" - "+this.listBooks.get(x).getName());
+        for (int x=0; x <= this.listBooks.size() - ONE; x++){
+            listBook.add((x+ ONE) +" - "+this.listBooks.get(x).getName());
         }
         listBook.add(" ");
+      return listBook;
+    }
 
-        writer.showResult(listBook);
-        Scanner scanner = new Scanner(System.in);
-        int bookIndex = scanner.nextInt();
 
+
+    public List<String> reservBook(int bookIndex) {
+        List<String> reservedBook = new ArrayList<String>();
         if(bookIndex <= this.listBooks.size()){
 
-            if(this.listBooks.get(bookIndex - 1).isReserved()){
-                result.add(Message.getSORRY_MESSAGE());
-                return result;
+            if(this.listBooks.get(bookIndex - ONE).isReserved()){
+                reservedBook.add(Message.getSORRY_MESSAGE());
+                return reservedBook;
             } else {
-                this.listBooks.get(bookIndex-1).setReserved(true);
-                System.out.println(this.listBooks.get(bookIndex-1).isReserved());
-                result.add(Message.getTHANK_MESSAGE());
-                return result;
+                this.listBooks.get(bookIndex-ONE).setReserved(true);
+                System.out.println(this.listBooks.get(bookIndex - ONE).isReserved());
+                reservedBook.add(Message.getTHANK_MESSAGE());
+                return reservedBook;
             }
 
         } else {
@@ -145,14 +153,13 @@ public class Options {
             } catch (WrongOptionException e) {
                 System.err.println(e.getMessage());
             }
-               return result;
+            return reservedBook;
         }
-
     }
 
     public void logout() {
 
-        ManageFlowBook.main(null);
+        InitFlowBook.main(null);
     }
 
     public void exit() {

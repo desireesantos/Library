@@ -1,5 +1,6 @@
 package units;
 
+import javax.sound.sampled.AudioFileFormat;
 import java.util.Random;
 
 /**
@@ -10,6 +11,7 @@ public class Client {
 
     private String name;
     private String idLibrary;
+    private String passord;
 
 
     public Client() {
@@ -33,4 +35,12 @@ public class Client {
         return idLibrary;
     }
 
+    public void setPassord(String passord) {
+        this.passord = passord;
+
+    }
+
+    public String getPassord() {
+        return passord;
+    }
 }

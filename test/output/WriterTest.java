@@ -17,13 +17,17 @@ public class WriterTest {
     List<String> writerList = new ArrayList<String>();
     String lineValue = " ";
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    Writer output = new Writer(outputStream, new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[0]))){
+    Writer output;
 
-        @Override
-        public String readLine() {
-            return lineValue;
-        }
-    });
+    public WriterTest() {
+        output = new Writer(outputStream, new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[0]))){
+
+            @Override
+            public String readLine() {
+                return lineValue;
+            }
+        });
+    }
 
 
     @Test
