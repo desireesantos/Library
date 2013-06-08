@@ -3,7 +3,9 @@ package main;
 import exception.WrongOptionException;
 import in.Input;
 import output.Writer;
-import units.*;
+import units.Login;
+import units.MenuAdmin;
+import units.Message;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -17,41 +19,33 @@ import java.util.Scanner;
  * User: dsantos
  * Date: 6/5/13  - Time: 9:22 PM
  */
-public class FlowBook {
+public class FlowBookUser {
 
     private Login login =  new Login();
     private Input input = new Input();
-    private MenuAdmin menuAdmin = new MenuAdmin();
-    private MenuUser  menuUser = new MenuUser();
+    private MenuAdmin menu = new MenuAdmin();
     public static final int USERWANT_RESERVEBOOK = 5;
 
 
     public void init() throws WrongOptionException {
+
+
         printInicialMessage();
         if( login.execute(input.getInformationsFromConsole()))
-            flowToAdmin();
+            flow();
         else {
-            flowToUser ();
+            throw new WrongOptionException();
         }
     }
 
-    public void flowToAdmin(){
-        printMenuAdmin();
-        flow();
-    }
+    public void flow(){
 
-    public void flowToUser(){
-        printMenuUser();
-        flow();
-    }
-
-
-    private void flow(){
+        printMenu();
         int number = informationFromScanner();
         if(isToReserveBook(number)){
             listAllBooksToReserv();
         }else {
-            List<String> stringListToPrint = menuUser.commandUser(number);
+            List<String> stringListToPrint = menu.commandUser(number);
             printStringListsOnFlow(stringListToPrint);
         }
     }
@@ -67,13 +61,13 @@ public class FlowBook {
         List<String> result = new ArrayList<String>();
         login.execute(input.getInformationsFromConsole());
         result.add(Message.CREATED_USER);
-        printOnlyOneUnit(result);
+         printOnlyOneUnit(result);
         return true;
     }
 
 
     private void listAllBooksToReserv() {
-        List<String> stringReservList = menuAdmin.commandUser(USERWANT_RESERVEBOOK);
+        List<String> stringReservList = menu.commandUser(USERWANT_RESERVEBOOK);
         printStringListsOnFlow(stringReservList);
     }
 
@@ -101,15 +95,11 @@ public class FlowBook {
         return scanner.nextInt();
     }
 
-    private static void printMenuAdmin() {
+    private static void printMenu() {
         MenuAdmin menu = new MenuAdmin() ;
         printOnlyOneUnit(menu.printMenu());
     }
 
-    private static void printMenuUser() {
-        MenuUser menu = new MenuUser() ;
-        printOnlyOneUnit(menu.printMenu());
-    }
 
     private static void printInicialMessage() {
         List<String> stringList = new ArrayList<String>();
