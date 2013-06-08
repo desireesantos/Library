@@ -6,30 +6,14 @@ package units;
  */
 public class Message {
 
-    final static String ERROR_MESSAGE = "Choose a valid option";
-    final static String ERROR_USERINFORMATION = "Not valid information";
-    final static String THANK_MESSAGE = "Thank you ! Enjoy the book";
-    final static String SORRY_MESSAGE = "Sorry we don't have that book yet";
-    final static String WELCOME = " ** Welcome to Reservation Book Software **";
+    public final static String ERROR_MESSAGE = "Choose a valid option";
+    public final static String ERROR_USERINFORMATION = "Not valid information";
+    public final static String THANK_MESSAGE = "Thank you ! Enjoy the book";
+    public final static String THANK_MESSAGE_UNRESERVED_BOOK = " Book available to reserved";
+    public final static String SORRY_MESSAGE = "Sorry we don't have that book yet";
+    public final static String NO_BOOK = " Don't have book reserved";
+    public final static String WELCOME = " ** Welcome to Reservation Book Software **";
 
+    public final static String CREATED_USER = " Create user !";
 
-    public static String getWELCOME() {
-        return WELCOME;
-    }
-
-    public static String getERROR_MESSAGE() {
-        return ERROR_MESSAGE;
-    }
-
-    public static String getTHANK_MESSAGE() {
-        return THANK_MESSAGE;
-    }
-
-    public static String getSORRY_MESSAGE() {
-        return SORRY_MESSAGE;
-    }
-
-    public static String getERROR_USERINFORMATION() {
-        return ERROR_USERINFORMATION;
-    }
 }

@@ -12,6 +12,7 @@ public class Client {
     private String name;
     private String idLibrary;
     private String passord;
+    private boolean permission = false;
 
 
     public Client() {
@@ -38,6 +39,14 @@ public class Client {
     public void setPassord(String passord) {
         this.passord = passord;
 
+    }
+
+    public boolean isPermission() {
+        return permission;
+    }
+
+    public void setPermission(boolean permission) {
+        this.permission = permission;
     }
 
     public String getPassord() {

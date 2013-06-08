@@ -1,9 +1,6 @@
 package units;
 
-
-
 import output.Writer;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,27 +13,24 @@ import java.util.List;
 public class Login {
 
     public boolean execute(Client client){
+        welcomeToSystem(client);
+        return client.isPermission() ? true : false;
+    }
 
 
+
+    private void welcomeToSystem(Client client) {
+        List<String> stringList = new ArrayList<String>();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Writer writer = new Writer(outputStream, new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[0]))));
-        List<String> stringList = new ArrayList<String>();
 
-
-        if(client.getName().equals("admin") && client.getPassord().equals("admin")){
-            stringList.add( " ");
-            stringList.add( "Welcome " + client.getName());
-            writer.printMenu(stringList);
-            return true;
-
-        } else {
-
-            stringList.add( " ");
-            stringList.add( Message.getERROR_USERINFORMATION());
-            writer.printMenu(stringList);
-            return false;
-        }
+        stringList.add(" ");
+        stringList.add("Welcome " + client.getName());
+        writer.printMenu(stringList);
     }
+
+
+
 
 }
 
