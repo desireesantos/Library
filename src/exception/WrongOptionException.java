@@ -8,7 +8,7 @@ import units.Message;
  */
 public class WrongOptionException extends Throwable {
 
-    private String msg = Message.getERROR_MESSAGE();
+    private String msg = Message.ERROR_MESSAGE;
 
     public String getMessage(){
         return msg;

@@ -25,7 +25,7 @@ public class Writer {
     public void printONFlow(List<String> writer) {
         FlowBook flowBook = new FlowBook();
         printMenu(writer);
-        flowBook.flow();
+        flowBook.flowToAdmin();
     }
 
 
