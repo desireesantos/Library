@@ -1,4 +1,4 @@
-Library
+My Library
 =======
 
 Library Project is a Java Project only to pratice  POO.
