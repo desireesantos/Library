@@ -18,7 +18,7 @@ public class Input {
         client.setName(console.readLine("Type your Username: "));
         client.setPassord(new String(console.readPassword ("Type your password: ")));
 
-        boolean permission = isPermitted(console.readLine("Type what are you [A]Admin - [U]User :"));
+        boolean permission = isPermitted(console.readLine("Type what are you [A]Admin - [U]User: "));
         client.setPermission(permission);
         return client;
     }
