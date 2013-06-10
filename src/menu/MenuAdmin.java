@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Classe que representa o menu principal do sistema
+ * Outra linha
  */
 public class MenuAdmin {
 
