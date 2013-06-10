@@ -21,8 +21,6 @@ import java.util.Scanner;
  */
 public class FlowBookUser {
 
-    public static final String USER = "user";
-    private Login login =  new Login();
     private Input input = new Input();
     private MenuUser menu = new MenuUser();
     public static final int USERWANT_RESERVEBOOK = 5;
@@ -35,29 +33,19 @@ public class FlowBookUser {
             listAllBooksToReserv();
         }else {
             List<String> stringListToPrint = menu.commandUser(number);
-            printStringListsOnFlow(stringListToPrint, USER);
+            printStringListsOnFlow(stringListToPrint);
         }
     }
-
 
     public int flowToReservBook(List<String> listBook) {
         printOnlyOneUnit(listBook);
         return input.getInformationsFromScanner();
     }
 
-    //TODO:
-    public boolean flowToCreateClient() {
-        List<String> result = new ArrayList<String>();
-        login.execute(input.getInformationsFromConsole());
-        result.add(Message.CREATED_USER);
-         printOnlyOneUnit(result);
-        return true;
-    }
-
 
     private void listAllBooksToReserv() {
         List<String> stringReservList = menu.commandUser(USERWANT_RESERVEBOOK);
-        printStringListsOnFlow(stringReservList, USER);
+        printStringListsOnFlow(stringReservList);
     }
 
     private boolean isToReserveBook(int number) {
@@ -65,11 +53,11 @@ public class FlowBookUser {
         return number == USERWANT_RESERVEBOOK ? true : false;
     }
 
-    private static void printStringListsOnFlow(List<String> stringListToPrint, String user) {
+    private static void printStringListsOnFlow(List<String> stringListToPrint) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Writer writer = new Writer(outputStream, new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[0]))));
 
-        writer.printONFlow(stringListToPrint);
+        writer.printONFlowUser(stringListToPrint);
     }
 
     private static void printOnlyOneUnit(List<String> stringListToPrint) {
@@ -85,7 +73,7 @@ public class FlowBookUser {
     }
 
     private static void printMenu() {
-        MenuAdmin menu = new MenuAdmin() ;
+        MenuUser menu = new MenuUser() ;
         printOnlyOneUnit(menu.printMenu());
     }
 
