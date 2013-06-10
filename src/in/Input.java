@@ -17,7 +17,9 @@ public class Input {
         Console console = System.console();
         client.setName(console.readLine("Type your Username: "));
         client.setPassord(new String(console.readPassword ("Type your password: ")));
-        client.setPermission(Boolean.parseBoolean(console.readLine("Permission [y] Yes  [n]Not :")));
+
+        boolean permission = isPermitted(console.readLine("Type what are you [A]Admin - [U]User :"));
+        client.setPermission(permission);
         return client;
     }
 
@@ -26,4 +28,8 @@ public class Input {
         return scanner.nextInt();
     }
 
+
+    private boolean isPermitted(String permission){
+      return   permission.equalsIgnoreCase("A") ? true : false;
+    }
 }

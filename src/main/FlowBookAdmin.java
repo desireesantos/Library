@@ -4,7 +4,6 @@ import in.Input;
 import output.Writer;
 import units.Login;
 import menu.MenuAdmin;
-import menu.MenuUser;
 import units.Message;
 
 import java.io.BufferedReader;
@@ -19,23 +18,24 @@ import java.util.Scanner;
  * User: dsantos
  * Date: 6/5/13  - Time: 9:22 PM
  */
-public class FlowBookUser {
+public class FlowBookAdmin {
 
-    public static final String USER = "user";
     private Login login =  new Login();
     private Input input = new Input();
-    private MenuUser menu = new MenuUser();
+    private MenuAdmin menu = new MenuAdmin();
     public static final int USERWANT_RESERVEBOOK = 5;
 
 
+
     public void flow(){
+
         printMenu();
         int number = informationFromScanner();
         if(isToReserveBook(number)){
             listAllBooksToReserv();
         }else {
-            List<String> stringListToPrint = menu.commandUser(number);
-            printStringListsOnFlow(stringListToPrint, USER);
+            List<String> stringListToPrint = menu.commandAdmin(number);
+            printStringListsOnFlow(stringListToPrint);
         }
     }
 
@@ -45,7 +45,6 @@ public class FlowBookUser {
         return input.getInformationsFromScanner();
     }
 
-    //TODO:
     public boolean flowToCreateClient() {
         List<String> result = new ArrayList<String>();
         login.execute(input.getInformationsFromConsole());
@@ -56,8 +55,8 @@ public class FlowBookUser {
 
 
     private void listAllBooksToReserv() {
-        List<String> stringReservList = menu.commandUser(USERWANT_RESERVEBOOK);
-        printStringListsOnFlow(stringReservList, USER);
+        List<String> stringReservList = menu.commandAdmin(USERWANT_RESERVEBOOK);
+        printStringListsOnFlow(stringReservList);
     }
 
     private boolean isToReserveBook(int number) {
@@ -65,7 +64,7 @@ public class FlowBookUser {
         return number == USERWANT_RESERVEBOOK ? true : false;
     }
 
-    private static void printStringListsOnFlow(List<String> stringListToPrint, String user) {
+    private static void printStringListsOnFlow(List<String> stringListToPrint) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Writer writer = new Writer(outputStream, new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[0]))));
 
@@ -88,7 +87,5 @@ public class FlowBookUser {
         MenuAdmin menu = new MenuAdmin() ;
         printOnlyOneUnit(menu.printMenu());
     }
-
-
 
 }

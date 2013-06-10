@@ -17,8 +17,6 @@ public class Login {
         return client.isPermission() ? true : false;
     }
 
-
-
     private void welcomeToSystem(Client client) {
         List<String> stringList = new ArrayList<String>();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

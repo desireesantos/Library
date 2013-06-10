@@ -28,6 +28,12 @@ public class Writer {
         flowBook.flowToAdmin();
     }
 
+    public void printONFlowUser(List<String> writer) {
+        FlowBook flowBook = new FlowBook();
+        printMenu(writer);
+        flowBook.flowToUser();
+    }
+
 
     public void printMenu(List<String> writer) {
         for (int x=0; x <= writer.size() -1 ;x++ ){

@@ -2,6 +2,8 @@ package main;
 
 import exception.WrongOptionException;
 import in.Input;
+import menu.MenuAdmin;
+import menu.MenuUser;
 import output.Writer;
 import units.*;
 
@@ -19,14 +21,17 @@ import java.util.Scanner;
  */
 public class FlowBook {
 
+    public static final String ADMIN = "admin";
+    public static final String USER = "user";
     private Login login =  new Login();
     private Input input = new Input();
     private MenuAdmin menuAdmin = new MenuAdmin();
-    private MenuUser  menuUser = new MenuUser();
+    private MenuUser menuUser = new MenuUser();
     public static final int USERWANT_RESERVEBOOK = 5;
 
 
     public void init() throws WrongOptionException {
+
         printInicialMessage();
         if( login.execute(input.getInformationsFromConsole()))
             flowToAdmin();
@@ -37,23 +42,12 @@ public class FlowBook {
 
     public void flowToAdmin(){
         printMenuAdmin();
-        flow();
+        flow(ADMIN);
     }
 
     public void flowToUser(){
         printMenuUser();
-        flow();
-    }
-
-
-    private void flow(){
-        int number = informationFromScanner();
-        if(isToReserveBook(number)){
-            listAllBooksToReserv();
-        }else {
-            List<String> stringListToPrint = menuUser.commandUser(number);
-            printStringListsOnFlow(stringListToPrint);
-        }
+        flow(USER);
     }
 
 
@@ -62,7 +56,7 @@ public class FlowBook {
         return input.getInformationsFromScanner();
     }
 
-    //TODO:
+
     public boolean flowToCreateClient() {
         List<String> result = new ArrayList<String>();
         login.execute(input.getInformationsFromConsole());
@@ -70,6 +64,29 @@ public class FlowBook {
         printOnlyOneUnit(result);
         return true;
     }
+
+    private void flow(String typeUser){
+        int number = informationFromScanner();
+        if(isToReserveBook(number))
+            listAllBooksToReserv();
+        else if (ADMIN.equalsIgnoreCase(typeUser)) {
+            flowprintAdmin(number);
+        } else flowprintUser(number);
+
+    }
+
+    private void flowprintUser(int number) {
+        List<String> stringListToPrint = menuUser.commandUser(number);
+        printStringListsOnFlowUser(stringListToPrint);
+    }
+
+    private void flowprintAdmin(int number) {
+        List<String> stringListToPrint = menuAdmin.commandUser(number);
+        printStringListsOnFlow(stringListToPrint);
+    }
+
+
+
 
 
     private void listAllBooksToReserv() {
@@ -89,12 +106,15 @@ public class FlowBook {
         writer.printONFlow(stringListToPrint);
     }
 
-    private static void printOnlyOneUnit(List<String> stringListToPrint) {
+    private static void printStringListsOnFlowUser(List<String> stringListToPrint) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Writer writer = new Writer(outputStream, new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[0]))));
 
-        writer.printMenu(stringListToPrint);
+        writer.printONFlowUser(stringListToPrint);
     }
+
+
+
 
     private static int informationFromScanner() {
         Scanner scanner = new Scanner(System.in);

@@ -2,9 +2,10 @@ package menuoptions;
 
 import exception.WrongOptionException;
 import main.FlowBook;
-import main.FlowBookAdmin;
 import main.InitFlowBook;
-import units.*;
+import units.Book;
+import units.Client;
+import units.Message;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +14,12 @@ import java.util.List;
  * User: dsantos
  * Date: 5/27/13  - Time: 2:08 PM
  */
-public class OptionsAdmin {
+public class OptionsUser {
 
     public static final int ONE = 1;
     private List<Book> listBooks = new ArrayList<Book>();
 
-    public OptionsAdmin() {
+    public OptionsUser() {
         this.listBooks = listBooks();
 
     }
@@ -112,18 +113,24 @@ public class OptionsAdmin {
     public List<String> reserveBook() {
 
         List<String> listBook = listBooksToReserv();
+
+
+
         return  chooseBook(listBook);
+
+
     }
 
 
     private List<String> chooseBook(List<String> listBook) {
-        FlowBookAdmin flow = new FlowBookAdmin();
+        FlowBook flow = new FlowBook();
         int indexBook = flow.flowToReservBook(listBook);
         return reservBook(indexBook);
 
     }
 
     private List<String> listBooksToReserv() {
+
         List<String> listBook = new ArrayList<String>();
         for (int x=0; x <= this.listBooks.size() - ONE; x++){
             listBook.add((x+ ONE) +" - "+this.listBooks.get(x).getName());
@@ -148,11 +155,26 @@ public class OptionsAdmin {
                 return reservedBook;
             }
 
-        } else
-            new WrongOptionException();
+        } else {
 
-        return reservedBook;
+            try {
+                throw new WrongOptionException();
+            } catch (WrongOptionException e) {
+                System.err.println(e.getMessage());
+            }
+            return reservedBook;
+        }
+    }
 
+
+
+    public void logout() {
+
+        InitFlowBook.main(null);
+    }
+
+    public void exit() {
+        System.exit(1);
     }
 
     public List<String> unreserveBook() {
@@ -165,8 +187,8 @@ public class OptionsAdmin {
             if(book.isReserved())
                 books.add(book);
         }
-
         if (books.size() == 0){
+
             booksReserved.add(Message.NO_BOOK);
             return booksReserved;
         }
@@ -177,11 +199,14 @@ public class OptionsAdmin {
         booksReserved.add(" ");
 
         return unReserveChoose(booksReserved);
+
+
+
     }
 
 
     private List<String> unReserveChoose(List<String> bookReserved) {
-        FlowBookAdmin flow = new FlowBookAdmin();
+        FlowBook flow = new FlowBook();
         int indexBook = flow.flowToReservBook(bookReserved);
 
         return rollbackReservBook(indexBook);
@@ -210,15 +235,9 @@ public class OptionsAdmin {
     }
 
     public void createUser() {
-        FlowBookAdmin flow = new FlowBookAdmin();
+        FlowBook flow = new FlowBook();
         flow.flowToCreateClient();
-    }
 
-    public void logout() {
-        InitFlowBook.main(null);
-    }
 
-    public void exit() {
-        System.exit(1);
     }
 }
