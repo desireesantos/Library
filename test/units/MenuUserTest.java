@@ -1,5 +1,6 @@
 package units;
 
+import menu.MenuUser;
 import org.junit.Assert;
 import org.junit.Test;
 

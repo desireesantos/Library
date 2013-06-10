@@ -1,7 +1,6 @@
 package menuoptions;
 
 import exception.WrongOptionException;
-import main.FlowBook;
 import main.FlowBookAdmin;
 import main.InitFlowBook;
 import units.*;

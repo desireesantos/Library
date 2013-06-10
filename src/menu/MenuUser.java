@@ -14,7 +14,6 @@ public class MenuUser {
 
     private static OptionsUser manage = new OptionsUser();
 
-
     public List<String> printMenu() {
         List<String> stringListToPrint = new ArrayList<String>();
 
@@ -30,8 +29,6 @@ public class MenuUser {
 
         return stringListToPrint;
     }
-
-
 
     public List<String> commandUser(int userType) {
         switch (userType) {
@@ -51,12 +48,7 @@ public class MenuUser {
             case 7:
                 manage.exit();
             default:
-                try {
-                    throw new WrongOptionException();
-                } catch (WrongOptionException e) {
-                    System.err.println(e.getMessage());
-
-                }
+                new WrongOptionException();
         }
         return null;
     }

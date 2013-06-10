@@ -1,6 +1,7 @@
 package output;
 
-import main.FlowBook;
+import main.FlowBookAdmin;
+import main.FlowBookUser;
 
 import java.io.*;
 import java.util.List;
@@ -23,15 +24,15 @@ public class Writer {
 
 
     public void printONFlow(List<String> writer) {
-        FlowBook flowBook = new FlowBook();
+        FlowBookAdmin flowBook = new FlowBookAdmin();
         printMenu(writer);
-        flowBook.flowToAdmin();
+        flowBook.flow();
     }
 
     public void printONFlowUser(List<String> writer) {
-        FlowBook flowBook = new FlowBook();
+        FlowBookUser flowBook = new FlowBookUser();
         printMenu(writer);
-        flowBook.flowToUser();
+        flowBook.flow();
     }
 
 
