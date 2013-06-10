@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Classe que representa o menu principal do sistema
+ * Linha nova
  */
 public class MenuUser {
 
