@@ -1,12 +1,11 @@
 package menuoptions;
 
 import exception.WrongOptionException;
-import main.FlowBookUser;
+import flow.FlowBookUser;
 import main.InitFlowBook;
 import units.Book;
 import units.Client;
 import units.Message;
-
 import java.util.ArrayList;
 import java.util.List;
 

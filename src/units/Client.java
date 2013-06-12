@@ -1,5 +1,7 @@
 package units;
 
+import com.sun.org.apache.xerces.internal.xni.XMLString;
+
 import javax.sound.sampled.AudioFileFormat;
 import java.util.Random;
 
@@ -12,7 +14,7 @@ public class Client {
     private String name;
     private String idLibrary;
     private String passord;
-    private boolean permission = false;
+    private boolean permission;
 
 
     public Client() {
@@ -47,5 +49,9 @@ public class Client {
 
     public void setPassord(String passord) {
         this.passord = passord;
+    }
+
+    public String getPassword() {
+        return passord;
     }
 }

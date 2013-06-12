@@ -1,5 +1,7 @@
 package main;
 
+import flow.FlowBookAdmin;
+import flow.FlowBookUser;
 import in.Input;
 import output.Writer;
 import units.Client;
@@ -20,14 +22,16 @@ public class FlowBook {
 
     static List<Client> clients = new ArrayList<Client>();
     FlowBookAdmin admin = new FlowBookAdmin();
-    FlowBookUser  user = new FlowBookUser();
+    FlowBookUser user = new FlowBookUser();
 
 
     public void init()  {
         Input input = new Input();
         printInicialMessage();
         updateListOfUser();
-        if(IsAdmin(input.getInformationsFromConsole(), clients))
+        Client client = input.createUser(input.getInformationsFromConsole());
+
+        if(IsAdmin(client, clients))
             admin.flow();
         else
             user.flow();

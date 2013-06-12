@@ -1,9 +1,12 @@
 package in;
 
+
 import units.Client;
 
 import java.io.Console;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
 /**
  * User: dsantos
@@ -11,14 +14,28 @@ import java.util.Scanner;
  */
 public class Input {
 
-    public Client getInformationsFromConsole(){
+    public static final String ADMIN = "A";
+    public static final int EXIST_PASSORD = 3;
+    public static final int HAS_PASSWORD = EXIST_PASSORD;
+
+    public List<String> getInformationsFromConsole(){
+
+        List<String> personalInformationFromConsole = new ArrayList<String>();
+        Console console = System.console();
+        personalInformationFromConsole.add(console.readLine("Type your Username: "));
+        personalInformationFromConsole.add(String.valueOf(console.readPassword("Type your password: ")));
+
+        return personalInformationFromConsole ;
+    }
+
+    public Client createClientFromConsole(){
         Client client = new Client();
+        boolean permission;
 
         Console console = System.console();
         client.setName(console.readLine("Type your Username: "));
         client.setPassord(new String(console.readPassword ("Type your password: ")));
-
-        boolean permission = isPermitted(console.readLine("Type what are you [A]Admin - [U]User: "));
+        permission = isPermitted(console.readLine("Type what are you [A]Admin - [U]User: "));
         client.setPermission(permission);
         return client;
     }
@@ -28,8 +45,20 @@ public class Input {
         return scanner.nextInt();
     }
 
+    // Pegar os dados os dados do console e criar cliente
+    public Client createUser(List<String> informationClient){
+       Client client = new Client();
+
+        client.setName(informationClient.get(0));
+        client.setPassord(informationClient.get(1));
+        if (informationClient.size() == HAS_PASSWORD)
+
+            client.setPermission(Boolean.parseBoolean(informationClient.get(2)));
+
+       return client;
+    }
 
     private boolean isPermitted(String permission){
-      return   permission.equalsIgnoreCase("A") ? true : false;
+      return   permission.equalsIgnoreCase(ADMIN) ? true : false;
     }
 }
