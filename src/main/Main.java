@@ -1,7 +1,7 @@
 package main;
 
 
-public class InitFlowBook {
+public class Main {
 
     public static void main(String[] args){
         FlowBook flow = new FlowBook();
