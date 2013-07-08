@@ -14,7 +14,7 @@ public class Login {
 
     public boolean execute(Client client){
         welcomeToSystem(client);
-        return client.isPermission() ? true : false;
+        return client.isAdmin() ? true : false;
     }
 
     private void welcomeToSystem(Client client) {

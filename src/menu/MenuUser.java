@@ -1,8 +1,8 @@
 package menu;
 
-import exception.WrongOptionException;
-import menuoptions.OptionsAdmin;
+import menuoptions.WrongOptionException;
 import menuoptions.OptionsUser;
+import units.Client;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,13 @@ public class MenuUser {
 
     private static OptionsUser manage = new OptionsUser();
 
+    public void setUser(Client user) {
+        this.user = user;
+    }
+
+    private Client user;
+
+
     public List<String> printMenu() {
         List<String> stringListToPrint = new ArrayList<String>();
 
@@ -25,8 +32,9 @@ public class MenuUser {
         stringListToPrint.add("3 - Reserved Books ");
         stringListToPrint.add("4 - Your profile ");
         stringListToPrint.add("5 - Reserve Books ");
-        stringListToPrint.add("6 - Change User ");
-        stringListToPrint.add("7 - Exit ");
+        stringListToPrint.add("6 - List of Movie ");
+        stringListToPrint.add("7 - Change User ");
+        stringListToPrint.add("8 - Exit ");
         stringListToPrint.add(" ");
 
         return stringListToPrint;
@@ -42,12 +50,14 @@ public class MenuUser {
             case 3:
                 return(manage.reservedBooks());
             case 4:
-                return(manage.userProfile());
+                return(manage.userProfile(user));
             case 5:
                 return(manage.reserveBook());
             case 6:
-                manage.logout();
+                 return(manage.listMovies());
             case 7:
+                manage.logout();
+            case 8:
                 manage.exit();
             default:
                 new WrongOptionException();

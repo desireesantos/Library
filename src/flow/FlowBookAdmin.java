@@ -3,7 +3,6 @@ package flow;
 import in.Input;
 import output.Writer;
 import units.Client;
-import units.Login;
 import menu.MenuAdmin;
 import units.Message;
 
@@ -47,7 +46,7 @@ public class FlowBookAdmin {
     }
 
     public int flowToReservBook(List<String> listBook) {
-        printOnlyOneUnit(listBook);
+        printResult(listBook);
         return input.getInformationsFromScanner();
     }
 
@@ -55,7 +54,7 @@ public class FlowBookAdmin {
         List<String> result = new ArrayList<String>();
         clients.add(input.createClientFromConsole());
         result.add(Message.CREATED_USER);
-        printOnlyOneUnit(result);
+        printResult(result);
         return true;
     }
 
@@ -76,7 +75,7 @@ public class FlowBookAdmin {
         writer.printONFlow(stringListToPrint);
     }
 
-    private static void printOnlyOneUnit(List<String> stringListToPrint) {
+    private static void printResult(List<String> stringListToPrint) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         Writer writer = new Writer(outputStream, new BufferedReader(new InputStreamReader(new ByteArrayInputStream(new byte[0]))));
 
@@ -90,20 +89,20 @@ public class FlowBookAdmin {
 
     private static void printMenu() {
         MenuAdmin menu = new MenuAdmin() ;
-        printOnlyOneUnit(menu.printMenu());
+        printResult(menu.printMenu());
     }
 
     private void createClients() {
         Client client = new Client();
         client.setName("admin");
         client.setPassord("admin");
-        client.setPermission(true);
+        client.setAdmin(true);
         clients.add(client);
 
         Client client1 = new Client();
         client1.setName("user");
         client1.setPassord("user");
-        client1.setPermission(false);
+        client1.setAdmin(false);
         clients.add(client1);
     }
 

@@ -2,16 +2,13 @@ package flow;
 
 import in.Input;
 import output.Writer;
-import units.Login;
-import menu.MenuAdmin;
 import menu.MenuUser;
-import units.Message;
+import units.Client;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,6 +22,14 @@ public class FlowBookUser {
     private MenuUser menu = new MenuUser();
     public static final int USERWANT_RESERVEBOOK = 5;
 
+    public Client getClient() {
+        return client;
+    }
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    private Client client;
 
     public void flow(){
         printMenu();
@@ -32,15 +37,22 @@ public class FlowBookUser {
         if(isToReserveBook(number)){
             listAllBooksToReserv();
         }else {
+            updateUserInMenu();
             List<String> stringListToPrint = menu.commandUser(number);
             printStringListsOnFlow(stringListToPrint);
         }
+    }
+
+    private void updateUserInMenu() {
+        menu.setUser(client);
     }
 
     public int flowToReservBook(List<String> listBook) {
         printOnlyOneUnit(listBook);
         return input.getInformationsFromScanner();
     }
+
+
 
     private void listAllBooksToReserv() {
         List<String> stringReservList = menu.commandUser(USERWANT_RESERVEBOOK);

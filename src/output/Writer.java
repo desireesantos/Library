@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class Writer {
 
+    public static final String TEXT_COLOR_PINK = "\033[95m";
     private PrintStream out;
     private BufferedReader in;
 
@@ -35,7 +36,7 @@ public class Writer {
 
     public void printMenu(List<String> writer) {
         for (int x=0; x <= writer.size() -1 ;x++ ){
-            System.out.println(writer.get(x).toString() + "\033[95m");
+            System.out.println(writer.get(x).toString() + TEXT_COLOR_PINK);
         }
         System.out.println(" ");
 

@@ -36,7 +36,7 @@ public class Input {
         client.setName(console.readLine("Type your Username: "));
         client.setPassord(new String(console.readPassword ("Type your password: ")));
         permission = isPermitted(console.readLine("Type what are you [A]Admin - [U]User: "));
-        client.setPermission(permission);
+        client.setAdmin(permission);
         return client;
     }
 
@@ -45,15 +45,16 @@ public class Input {
         return scanner.nextInt();
     }
 
-    // Pegar os dados os dados do console e criar cliente
-    public Client createUser(List<String> informationClient){
+
+    public Client createUser(List<String> informationClient, int idUserNumber){
        Client client = new Client();
 
-        client.setName(informationClient.get(0));
+        client.setName(String.valueOf(idUserNumber));
         client.setPassord(informationClient.get(1));
+        client.setIdLibrary(String.valueOf(idUserNumber));
         if (informationClient.size() == HAS_PASSWORD)
 
-            client.setPermission(Boolean.parseBoolean(informationClient.get(2)));
+            client.setAdmin(Boolean.parseBoolean(informationClient.get(2)));
 
        return client;
     }

@@ -1,15 +1,11 @@
 package menu;
 
-import exception.WrongOptionException;
+import menuoptions.WrongOptionException;
 import menuoptions.OptionsAdmin;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Classe que representa o menu principal do sistema
- * Outra linha
- */
+
 public class MenuAdmin {
 
     private static OptionsAdmin manage = new OptionsAdmin();

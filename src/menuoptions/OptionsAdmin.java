@@ -1,6 +1,5 @@
 package menuoptions;
 
-import exception.WrongOptionException;
 import flow.FlowBookAdmin;
 import main.InitFlowBook;
 import units.*;
@@ -113,7 +112,6 @@ public class OptionsAdmin {
         List<String> listBook = listBooksToReserv();
         return  chooseBook(listBook);
     }
-
 
     private List<String> chooseBook(List<String> listBook) {
         FlowBookAdmin flow = new FlowBookAdmin();

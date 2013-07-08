@@ -20,24 +20,43 @@ import java.util.List;
  */
 public class FlowBook {
 
+    public static final int ONE = 1;
     static List<Client> clients = new ArrayList<Client>();
+    static int idUserNumber;
     FlowBookAdmin admin = new FlowBookAdmin();
     FlowBookUser user = new FlowBookUser();
 
 
+
+
     public void init()  {
         Input input = new Input();
-        printInicialMessage();
+
+        printWelcomeMessage();
         updateListOfUser();
-        Client client = input.createUser(input.getInformationsFromConsole());
+        Client client = input.createUser(input.getInformationsFromConsole(),idUserNumber);
+
 
         if(IsAdmin(client, clients))
             admin.flow();
         else
+            user.setClient(client);
             user.flow();
     }
 
+
+
+    private void updateIdUserNumber() {
+        if(idUserNumber == 0 ){
+            this.idUserNumber = 1111111;
+        } else{
+            this.idUserNumber += ONE;
+        }
+
+    }
+
     private void updateListOfUser() {
+        updateIdUserNumber();
         for(Client client: admin.getClients()){
 
             if(!clients.contains(client)){
@@ -49,12 +68,12 @@ public class FlowBook {
     private boolean IsAdmin(Client client, List<Client> clients) {
         for(Client user: clients) {
             if (client.getName().equalsIgnoreCase(user.getName()) && client.getPassword().equalsIgnoreCase(user.getPassword()))
-                return user.isPermission();
+                return user.isAdmin();
         }
         return false;
     }
 
-    private static void printInicialMessage() {
+    private static void printWelcomeMessage() {
         List<String> stringList = new ArrayList<String>();
         stringList.add(Message.WELCOME);
         stringList.add(" ");

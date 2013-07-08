@@ -1,10 +1,5 @@
 package units;
 
-import com.sun.org.apache.xerces.internal.xni.XMLString;
-
-import javax.sound.sampled.AudioFileFormat;
-import java.util.Random;
-
 /**
  * User: dsantos
  * Date: 5/27/13  - Time: 1:59 PM
@@ -14,17 +9,13 @@ public class Client {
     private String name;
     private String idLibrary;
     private String passord;
-    private boolean permission;
+    private boolean isAdmin;
 
 
-    public Client() {
-        this.idLibrary = createdIdLibrary();
+    public void setIdLibrary(String id) {
+        this.idLibrary = id.substring(0,3)+"-"+id.substring(3,7);
     }
 
-    private String createdIdLibrary() {
-        Random sortedNumber = new Random();
-        return idLibrary = String.valueOf(sortedNumber.nextInt(100));
-    }
 
     public String getName() {
         return name;
@@ -39,12 +30,12 @@ public class Client {
     }
 
 
-    public boolean isPermission() {
-        return permission;
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
-    public void setPermission(boolean permission) {
-        this.permission = permission;
+    public void setAdmin(boolean admin) {
+        this.isAdmin = admin;
     }
 
     public void setPassord(String passord) {

@@ -1,11 +1,12 @@
 package menuoptions;
 
-import exception.WrongOptionException;
 import flow.FlowBookUser;
 import main.InitFlowBook;
 import units.Book;
 import units.Client;
 import units.Message;
+import units.Movie;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +24,9 @@ public class OptionsUser {
 
     }
 
-    public List<String> userProfile() {
+    public List<String> userProfile(Client currentClient) {
         List<String> user = new ArrayList<String>();
-        Client client = new Client();
-        client.setName("Mário Martins");
+        Client client = currentClient;
 
         user.add("Dados Cadastrais: ");
         user.add(" ");
@@ -154,5 +154,34 @@ public class OptionsUser {
         }
         listBook.add(" ");
         return listBook;
+    }
+
+    public List<String> listMovies(){
+        List<String> listMovie = new ArrayList<String>();
+          listMovie.add("Movie         Year      Director   Rating");
+
+        for(Movie movie: createListMovies()){
+            listMovie.add(createString(movie));
+        }
+
+        listMovie.add(" ");
+        return listMovie ;
+    }
+
+    private String createString(Movie movie) {
+      return   movie.getName() +"  "+movie.getYear()+"  "+movie.getDirectorName()+"     "+movie.createRating();
+    }
+
+    private List<Movie> createListMovies(){
+        final int YEAR = 2000;
+        final String MOVIE = "LAGOA_AZUL";
+        final String DIRECTOR_NAME = "Ramesh Sippy";
+
+        List<Movie> listMovie = new ArrayList<Movie>();
+        for(int x=0; x < 15; x++){
+            Movie movie = new Movie(MOVIE +x,YEAR +x, DIRECTOR_NAME);
+            listMovie.add(movie);
+        }
+          return listMovie;
     }
 }
