@@ -1,4 +1,6 @@
-package units;
+package model;
+
+import java.util.Random;
 
 /**
  * User: dsantos
@@ -9,12 +11,6 @@ public class Client {
     private String name;
     private String idLibrary;
     private String passord;
-    private boolean isAdmin;
-
-
-    public void setIdLibrary(String id) {
-        this.idLibrary = id.substring(0,3)+"-"+id.substring(3,7);
-    }
 
 
     public String getName() {
@@ -25,24 +21,18 @@ public class Client {
         this.name = name;
     }
 
-    public String getIdLibrary() {
+    public String generateIdLibrary() {
+        createIdLibrary();
         return idLibrary;
     }
 
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.isAdmin = admin;
+    private void createIdLibrary() {
+        Random sortedNumber = new Random();
+        idLibrary = String.valueOf(sortedNumber.nextInt(100));
     }
 
     public void setPassord(String passord) {
         this.passord = passord;
     }
 
-    public String getPassword() {
-        return passord;
-    }
 }
